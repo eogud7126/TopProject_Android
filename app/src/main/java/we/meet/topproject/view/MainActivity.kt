@@ -1,6 +1,7 @@
 package we.meet.topproject.view
 
 import android.app.AlertDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView(){
         mBoardListAdapter = BoardListAdapter(mBoardItems){
             //클릭이벤트
-            val intent =Intent(this,)
+//            val intent = Intent(this,)
             Toast.makeText(this,"${it.title} 클릭됨",Toast.LENGTH_LONG).show()
         }
 
