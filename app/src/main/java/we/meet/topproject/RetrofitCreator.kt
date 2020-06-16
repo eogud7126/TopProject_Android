@@ -3,16 +3,18 @@ package we.meet.topproject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitCreator {
     companion object {
-        val API_BASE_URL = "http구름IP"
+        private const val API_BASE_URL = "https://onthetop-test.run.goorm.io/android/"
 
         private fun defaultRetrofit(): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(createOkHttpClient())
                 .build()
         }

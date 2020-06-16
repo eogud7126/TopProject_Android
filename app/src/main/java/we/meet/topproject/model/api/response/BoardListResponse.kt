@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import we.meet.topproject.model.BoardModel
 
 class BoardListResponse{
-    @SerializedName("get_boardlist")
+    @SerializedName("list")
     val boarditems: List<BoardModel> = listOf()
 }
