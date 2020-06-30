@@ -33,10 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mBoardItems.run {
-            add(BoardModel("1제목이에옹","상세 내용입니다.", Date().time,3,""))
-            add(BoardModel("2제목이에옹","상세 내용입니다.",202005261111,3,""))
-            add(BoardModel("3제목이에옹","상세 내용입니다.",202005261111,3,""))
-            add(BoardModel("4제목이에옹","상세 내용입니다.",202005261111,3,""))
+//            add(BoardModel(1,"상세 내용입니다.", Date().time,3,""))
         }
 
         compositeDisposable = CompositeDisposable()
@@ -46,18 +43,21 @@ class MainActivity : AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({ response: BoardListResponse ->
-                    for (item in response.boarditems) {
-                        Log.d("MainActivity", "response받음?")
+                    for (item in response.list) {
+                        Log.d("이름: ", item.name)
+                        Log.d("제목: ", item.subject)
+                        Log.d("내용: ", item.content)
+
                     }
                 }, { error: Throwable ->
-                    Log.d("MainActivity", error.localizedMessage)
+                    Log.d("섹션", error.localizedMessage)
                     Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_LONG)
                         .show()
                 })
             )
         }
         initRecyclerView()
-        initAddButton()
+//        initAddButton()
     }
 
     override fun onDestroy() {
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         mBoardListAdapter = BoardListAdapter(mBoardItems){
             //클릭이벤트
 //            val intent = Intent(this,)
-            Toast.makeText(this,"${it.title} 클릭됨",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"${it.subject} 클릭됨",Toast.LENGTH_LONG).show()
         }
 
         boardRL.run{
@@ -78,27 +78,27 @@ class MainActivity : AppCompatActivity() {
             adapter  = mBoardListAdapter
         }
     }
-    private fun initAddButton(){
-        newFAB.setOnClickListener {
-            openAddBoardDialog()
-        }
-    }
-    private fun openAddBoardDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.add_board,null)
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("추가하기")
-            .setView(dialogView)
-            .setPositiveButton("확인",{dialogInterface, i ->
-                val title = dialogView.et_title.text.toString()
-                val description = dialogView.et_description.text.toString()
-                val createdDate = Date().time
-
-                val boardModel = BoardModel(title,description,createdDate,0,"")
-                mBoardListAdapter.addItem(boardModel)
-                mBoardListAdapter.notifyDataSetChanged()
-            })
-            .setNegativeButton("취소",null)
-            .create()
-        dialog.show()
-    }
+//    private fun initAddButton(){
+//        newFAB.setOnClickListener {
+//            openAddBoardDialog()
+//        }
+//    }
+//    private fun openAddBoardDialog() {
+//        val dialogView = layoutInflater.inflate(R.layout.add_board,null)
+//        val dialog = AlertDialog.Builder(this)
+//            .setTitle("추가하기")
+//            .setView(dialogView)
+//            .setPositiveButton("확인",{dialogInterface, i ->
+//                val title = dialogView.et_title.text.toString()
+//                val description = dialogView.et_description.text.toString()
+//                val createdDate = Date().time
+//
+//                val boardModel = BoardModel(title,description,createdDate,0,"")
+//                mBoardListAdapter.addItem(boardModel)
+//                mBoardListAdapter.notifyDataSetChanged()
+//            })
+//            .setNegativeButton("취소",null)
+//            .create()
+//        dialog.show()
+//    }
 }

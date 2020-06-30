@@ -1,5 +1,6 @@
 package we.meet.topproject
 
+import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,6 +31,8 @@ class RetrofitCreator {
             } else {
                 interceptor.level = HttpLoggingInterceptor.Level.NONE
             }
+            Log.d("ok","잘받았는지")
+
             return OkHttpClient.Builder()
                 .addNetworkInterceptor(interceptor)
                 .build()

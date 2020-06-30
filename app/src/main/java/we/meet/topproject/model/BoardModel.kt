@@ -1,10 +1,16 @@
 package we.meet.topproject.model
 
+import java.sql.Timestamp
+
 data class BoardModel (
-    var title: String,
-    var description: String,
-    var createdDate: Long,
-    var commentCnt: Int,
-    var image: String)
+    var num: Int,
+    var name: String,
+    var passwd: String,
+    var subject: String,
+    var content: String,
+    var ip: String,
+    var reg_date: Timestamp,
+    var readcount: Int,
+    var filename: String)
 {
 }
